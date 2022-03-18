@@ -72,38 +72,44 @@ viajar_hasta(P2,Q2):-
 	es_destino(P2,Q2), !
 	; viajar_hasta(P2, Q2).
 
-suggest():- 
-	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
-	write('Por favor indique cual es el origen de su vuelo: \n'),
-	
-	viajar_desde(P),
-
-	%readln(P,_,_,_,lowercase),
-	%miembro(P2,P),
-	%es_origen(P2),
-	
-	write('De acuerdo. Indique su lugar de destino: \n'),
-	
-	viajar_hasta(P,Q),
-	%readln(Q,_,_,_,lowercase),
-	%miembro(Q2,Q),
-	%es_destino(P,Q2),
-	
-	write('Tiene usted alguna aerolinea de preferencia? \n'),
+preferencia_aerolinea(R2):-
 	readln(R,_,_,_,lowercase),
-	miembro(R2,R),
-	es_aerolinea(R2),
+        miembro(R2,R),
+        es_aerolinea(R2), !
+	; preferencia_aerolinea(R2).
 
-	write('Cuenta con alguna clase de preferencia? \n'),
+preferencia_clase(S2):-	
 	readln(S,_,_,_,lowercase),
 	miembro(S2,S),
-	es_clase(S2),
+	es_clase(S2), !
+	; preferencia_clase(S2).
+
+presupuesto(T):-
+	read(T),
+	number(T), !
+    	; read_number(T).
+
+
+suggest():- 
+	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
+
+	write('Por favor indique cual es el origen de su vuelo: \n'),
+	viajar_desde(P),
+	
+	write('De acuerdo. Indique su lugar de destino: \n'),
+	viajar_hasta(P,Q),
+	
+	write('Tiene usted alguna aerolinea de preferencia? \n'),
+	preferencia_aerolinea(R),
+
+	write('Cuenta con alguna clase de preferencia? \n'),
+	preferencia_clase(S),
 
 	write('Tiene usted algún presupuesto? \n'),
-	read(T),
-	number(T),
+	presupuesto(T),
 
-	write(P), write(' '), write(Q), write(' '), write(T).
+	write(P), write(' '), write(Q), write(' '), write(R), 
+	write(' '), write(S), write(' '), write(T).
 
 
 
