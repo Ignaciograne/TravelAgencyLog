@@ -87,7 +87,7 @@ preferencia_clase(S2):-
 presupuesto(T):-
 	read(T),
 	number(T), !
-    	; read_number(T).
+    	; presupuesto(T).
 
 
 suggest():- 
