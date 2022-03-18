@@ -1,6 +1,6 @@
 % ------------------------------------------------------------
 % Lugares
-
+:-consult(gramatica).
 es_origen(costa_rica).
 es_origen(san_jose).
 es_origen(madrid).
@@ -40,7 +40,7 @@ hecho(clase).
 hecho(presupuesto).
 % ------------------
 
-% Operadores 
+% Operadores
 :-op(800,fx,si).
 :-op(700,xfx,entonces).
 :-op(300,xfy,o).
@@ -60,10 +60,11 @@ miembro(X,[_|R]):-miembro(X,R).
 
     %conseguir_n():- read_number(N), write(N).
 
-viajar_desde(P2):- 
+viajar_desde(P2):-
 	readln(P,_,_,_,lowercase),
 	miembro(P2,P),
-	es_origen(P2), ! 
+	oracion(P,[]),
+	es_origen(P2), !
 	; viajar_desde(P2).
 
 viajar_hasta(P2,Q2):-
@@ -78,7 +79,7 @@ preferencia_aerolinea(R2):-
         es_aerolinea(R2), !
 	; preferencia_aerolinea(R2).
 
-preferencia_clase(S2):-	
+preferencia_clase(S2):-
 	readln(S,_,_,_,lowercase),
 	miembro(S2,S),
 	es_clase(S2), !
@@ -87,18 +88,18 @@ preferencia_clase(S2):-
 presupuesto(T):-
 	read(T),
 	number(T), !
-    	; read_number(T).
+	;presupuesto(T).
 
 
-suggest():- 
+suggest():-
 	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
 
 	write('Por favor indique cual es el origen de su vuelo: \n'),
 	viajar_desde(P),
-	
+
 	write('De acuerdo. Indique su lugar de destino: \n'),
 	viajar_hasta(P,Q),
-	
+
 	write('Tiene usted alguna aerolinea de preferencia? \n'),
 	preferencia_aerolinea(R),
 
@@ -108,7 +109,7 @@ suggest():-
 	write('Tiene usted algún presupuesto? \n'),
 	presupuesto(T),
 
-	write(P), write(' '), write(Q), write(' '), write(R), 
+	write(P), write(' '), write(Q), write(' '), write(R),
 	write(' '), write(S), write(' '), write(T).
 
 
