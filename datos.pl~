@@ -8,7 +8,6 @@ pais(chile). %7
 pais(brazil). %8
 pais(argentina). %9
 
-
 aerolinea(delta). %dt | 10
 aerolinea(avianca). %av | 12
 aerolinea(copa). %cp | 13
@@ -77,6 +76,7 @@ arco(jetsmart,js1423,canada,costa_rica,8,negocios,1300).
 arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
 
+es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
 conexion(Inicio,Final,Intermedio,Precio) :-
     arco(_,_,Inicio,Intermedio,_,_,Precio1),
@@ -87,6 +87,8 @@ camino(Inicio,Final) :- arco(_,_,Inicio,Final,_,_,_), ! .
 camino(Inicio,Final) :- arco(_,_,Inicio,Intermedio,_,_,_),
     camino(Intermedio,Final).
 
+% Clases
+es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
 
 
 /*
