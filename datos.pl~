@@ -70,6 +70,7 @@ arco(jetsmart,js1423,canada,costa_rica,8,negocios,1300).
 arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
 
+
 es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
 % Define la misma lista de destinos disponibles que de origenes

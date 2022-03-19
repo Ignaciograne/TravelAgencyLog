@@ -19,6 +19,8 @@ miembro(X,[X|_]).
 miembro(X,[_|R]):-miembro(X,R).
 
 
+
+
 %read_number(N) :-
 %   read(N),  % get user input
 %    number(N), !  % exit goal, is it a number?
@@ -52,12 +54,8 @@ preferencia_clase(S2):-
 	es_clase(S2), !
 	; preferencia_clase(S2).
 
-/*presupuesto(Numero):-
-	readln(T),
-	miembro(Numero,T),
-	es_Numero(Numero,T),!.
-
-es_Numero(X,[_|R]):- X>0;es_Numero(X,R).*/
+presupuesto(T):-
+	read(T),T>0,!.
 
 
 /*presupuesto(T):-
