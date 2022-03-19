@@ -15,12 +15,12 @@ aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
 /*
-Arco (Aerolínea,
+Arco (Aerolï¿½nea,
       Vuelo,
       AtoOrigen,
       AtoDestino,
       TiempoEstimado,
-      Clase[Económica-Negocios-Ambas],
+      Clase[Econï¿½mica-Negocios-Ambas],
       Costo)
 */
 
@@ -133,7 +133,7 @@ dijkstra(I,F,S,_,L):- menorArista(I,A),
 %caso que A(nodo de menor arista) sea diferente de del nodo
 %final, luego agregamos a la lista de seleccionados el nodo A y
 %lo eliminamos de la lista de candidatos y llamamos de nuevo
-%a la función dijkstra.
+%a la funciï¿½n dijkstra.
 
 dijkstra(I,F,S,C,L):-
     menorArista(I,A),

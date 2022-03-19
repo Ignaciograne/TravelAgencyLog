@@ -14,12 +14,12 @@ aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
 /*
-Arco (Aerolínea,
+Arco (Aerolï¿½nea,
       Vuelo,
       AtoOrigen,
       AtoDestino,
       TiempoEstimado,
-      Clase[Económica-Negocios-Ambas],
+      Clase[Econï¿½mica-Negocios-Ambas],
       Costo)
 */
 
@@ -76,6 +76,7 @@ arco(jetsmart,js1423,canada,costa_rica,8,negocios,1300).
 arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
 
+es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
 conexion(Inicio,Final,Intermedio,Precio) :-
     arco(_,_,Inicio,Intermedio,_,_,Precio1),
@@ -86,6 +87,8 @@ camino(Inicio,Final) :- arco(_,_,Inicio,Final,_,_,_), ! .
 camino(Inicio,Final) :- arco(_,_,Inicio,Intermedio,_,_,_),
     camino(Intermedio,Final).
 
+% Clases
+es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
 
 
 /*
@@ -132,7 +135,7 @@ dijkstra(I,F,S,_,L):- menorArista(I,A),
 %caso que A(nodo de menor arista) sea diferente de del nodo
 %final, luego agregamos a la lista de seleccionados el nodo A y
 %lo eliminamos de la lista de candidatos y llamamos de nuevo
-%a la función dijkstra.
+%a la funciï¿½n dijkstra.
 
 dijkstra(I,F,S,C,L):-
     menorArista(I,A),
