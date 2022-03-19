@@ -8,6 +8,7 @@ pais(chile). %7
 pais(brazil). %8
 pais(argentina). %9
 
+
 aerolinea(delta). %dt | 10
 aerolinea(avianca). %av | 12
 aerolinea(copa). %cp | 13
