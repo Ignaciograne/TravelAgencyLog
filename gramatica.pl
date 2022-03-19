@@ -145,7 +145,8 @@ sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposicione
 sintagma_verbal --> adverbio, puntuacion, pronombres ,puntuacion, adjetivos, puntuacion, sustantivos, puntuacion, verbo, puntuacion, conjuncion, puntuacion, preposiciones, puntuacion, infinitivo,puntuacion, conjuncion, puntuacion, sintagma_nominal.
 
 
-es_informacion(X):- es_aerolinea(X);es_clase(X), es_lugar(X).
+es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
+
 
 es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).
 
