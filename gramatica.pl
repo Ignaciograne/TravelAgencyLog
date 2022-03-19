@@ -1,8 +1,8 @@
-%Análisis de lenguaje estructura
-%Signos de puntuacio Definidos
+% Analisis de lenguaje estructura
+% Signos de puntuacion definidos
 puntuacion-->[,];[].
 
-%Preposiciones
+% Preposiciones
 preposiciones-->[].
 preposiciones-->[a].
 preposiciones-->[ante].
@@ -24,7 +24,7 @@ preposiciones-->[al].
 preposiciones-->[del].
 preposiciones-->[desde].
 
-%Articulos
+% Articulos
 articulo-->[].
 articulo-->[el].
 articulo-->[la].
@@ -38,9 +38,10 @@ articulo-->[unas].
 articulo-->[al].
 articulo-->[del].
 
-%sustantivos
+% Sustantivos
 sustantivos-->[destino];[avion];[].
-%Verbos
+
+% Verbos
 verbo-->[].
 verbo-->[viaje];[viajo];[viajamos];[viajaremos].
 verbo-->[voy];[vaya];[va];[vamos];[vayan];[vengo];[van].
@@ -64,15 +65,17 @@ verbo-->[ubica];[ubicamos];[ubican];[ubico].
 verbo-->[queda];[quedo];[quedan];[quedarme];[quedarnos];[quedaremos].
 verbo-->[desplazo];[desplaza];[desplazaremos];[desplazare];[desplazarme];[desplazarnos];[desplazaremos].
 
-%Infinitivos
+% Infinitivos
 infinitivo-->[].
 infinitivo-->[ir];[viajar];[venir];[pasar];[llegar];[trasladar].
 infinitivo-->[mover];[acudir];[asistir];[recorrer];[querer];[estar].
 infinitivo-->[encontrar];[necesitar];[dirigir],[gustar];[tener];[ubicar].
 infinitivo-->[desplazar].
-%clases
+
+% Clases
 clase --> [economica];[negocios].
-%Pronombres
+
+% Pronombres
 pronombres-->[].
 pronombres-->[yo].
 pronombres-->[nosotros].
@@ -85,7 +88,7 @@ pronombres-->[se].
 pronombres-->[nos].
 pronombres-->[mi].
 
-%locales de la ciudad
+% Locales de la ciudad
 local-->[tienda].
 local-->[pulperia].
 local-->[supermercado].
@@ -110,21 +113,21 @@ local-->[ferreteria].
 local-->[automercado].
 local-->[casa].
 
-%Adverbios
+% Adverbios
 adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[finalmente];[claro];[].
 
-%Conjunciones
+% Conjunciones
 conjuncion-->[que];[].
 
-%adjetivos
+% Adjetivos
 adjetivos-->[ultimo];[primero];[intermedio];[].
 
-%oraciones
+% Oraciones
 oracion --> sintagma_nominal, sintagma_verbal.
 
 oracion--> adverbio.
 
-%definición de sintagma
+% Definicion de sintagma
 sintagma_nominal-->[].
 
 sintagma_nominal --> pronombres.
