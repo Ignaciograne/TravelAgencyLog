@@ -14,19 +14,15 @@ aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
 /*
-Arco (Aerolínea,
+Arco (Aerolï¿½nea,
       Vuelo,
       AtoOrigen,
       AtoDestino,
       TiempoEstimado,
-      Clase[Económica-Negocios-Ambas],
+      Clase[Econï¿½mica-Negocios-Ambas],
       Costo)
 */
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 98731990557095ff1c4a29004bcbfd1a6941d5bc
 arco(delta,dt1097,argentina,chile,1,ambas,350).
 arco(delta,dt1079,chile,argentina,1,ambas,350).
 arco(delta,dt1087,brazil,chile,4,economica,550).
@@ -34,15 +30,12 @@ arco(delta,dt1074,chile,colombia,3,ambas,450).
 arco(delta,dt1067,peru,chile,2,economica,300).
 arco(delta,dt1084,brazil,colombia,4,negocios,700).
 arco(delta,dt1048,colombia,brazil,4,negocios,700).
-arco(delta,dt1048,colombia,venezuela,4,negocios,500).
-arco(delta,dt1048,colombia,peru,4,economico,350).
 arco(delta,dt1058,venezuela,brazil,4,economico,400).
 arco(delta,dt1061,peru,mexico,7,ambas,650).
 arco(delta,dt1012,mexico,canada,8,ambas,800).
 arco(delta,dt1023,canada,costa_rica,10,negocios,1100).
 arco(delta,dt1034,costa_rica,colombia,3,ambas,500).
 
-/*
 arco(avianca,av1297,argentina,chile,2,economico,300).
 arco(avianca,av1279,chile,argentina,2,ambas,350).
 arco(avianca,av1287,brazil,chile,6,negocios,700).
@@ -82,42 +75,112 @@ arco(jetsmart,js1412,mexico,canada,7,ambas,800).
 arco(jetsmart,js1423,canada,costa_rica,8,negocios,1300).
 arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
-*/
-
-
-%mas barato
-path(X, Y, N, Path) :- path(X, Y, N, [], Path).
-
-path(X, Y, N, Seen, [X]) :-
-    \+ memberchk(X, Seen),
-    arco(_, _, X, Y, _, _, N).
-path(X, Z, N, Seen, [X|T]) :-
-    \+ memberchk(X, Seen),
-    arco(_, _, X, Y, _, _, N0),
-    path(Y, Z, N1, [X|Seen], T),
-    \+ memberchk(X, T),
-    N is N0 + N1.
-
-
-uniq_shortest_path(X, Y, MinCost, Path) :-
-    path(X, Y, MinCost, Path),
-    \+ (path(X, Y, LowerCost, OtherPath),
-        OtherPath \= Path,
-        LowerCost =< MinCost).
-
 
 es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
-% Define la misma lista de destinos disponibles que de origenes
-es_destino(Origen,Destino):- Origen\=Destino, arco(_,_,_,Destino,_,_,_).
-es_destino(Origen,Destino):- Origen=Destino, write('El destino no puede ser igual al origen. \n').
+conexion(Inicio,Final,Intermedio,Precio) :-
+    arco(_,_,Inicio,Intermedio,_,_,Precio1),
+    arco(_,_,Intermedio,Final,_,_,Precio2),
+    Precio is Precio1+Precio2.
 
-% Aerolineas
-es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
+camino(Inicio,Final) :- arco(_,_,Inicio,Final,_,_,_), ! .
+camino(Inicio,Final) :- arco(_,_,Inicio,Intermedio,_,_,_),
+    camino(Intermedio,Final).
 
 % Clases
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
 
+
+/*
+%Implementacion de Dijkstra
+%definimos un grafo
+
+grafo(a,c,60).
+grafo(a,e,80).
+grafo(b,a,30).
+grafo(b,d,20).
+grafo(d,e,10).
+grafo(d,a,60).
+grafo(c,e,50).
+grafo(c,x,40).
+grafo(e,f,20).
+grafo(f,x,50).
+grafo(x,g,30).
+grafo(g,c,20).
+
+
+
+%nodo inicial, nodo destino, distancia, ruta
+
+%dijkstra(I,F,S,C,L), donde I es el nodo inicio,F el nodo Final,
+%S la lista de nodos seleccionados, C la lista de nodos candidatos,
+%L la lista de respuesta del camino y R de salida igual,L indica si
+% hay camino de I a F.
+
+dijkstra(_,_,_,[],L):- L=[].
+
+
+%en el siguiente predicado se ejecuta cuando se encuentra la
+%solucion: se determina la menorArista del Nodo I y se guarda
+%en A el nodo ke hace posible esto, luego se verifica si es el final
+% y por ultimo se agrega a la lista de salida.
+
+dijkstra(I,F,S,_,L):- menorArista(I,A),
+    A==F,
+    append(S,A,Lista),
+    L = Lista.
+
+
+
+%caso que A(nodo de menor arista) sea diferente de del nodo
+%final, luego agregamos a la lista de seleccionados el nodo A y
+%lo eliminamos de la lista de candidatos y llamamos de nuevo
+%a la funciï¿½n dijkstra.
+
+dijkstra(I,F,S,C,L):-
+    menorArista(I,A),
+    A\=F, %siA es diferente de F,osea no es el nodo destino
+    append(S,A,Lista1),
+    eliminar(A,C,Lista2),
+    dijkstra(A,F,Lista1,Lista2,L).
+
+
+
+
+menorArista(I,A):- findall(P,grafo(I,_,P),L),
+    menorlista(L,Menor),
+    grafo(I,A,Menor).
+
+
+
+
+
+%Detectar el menor elemento de una lista
+menorlista([],0).
+menorlista([X],X).
+menorlista([X|L],X):- menorlista(L,Y),
+    menor(X,Y).
+menorlista([X|L],Y):- menorlista(L,Y),
+    menor(Y,X).
+menor(X,Y):- X =< Y.
+
+
+%agregar un elemento al final de la lista
+append([],L,[L]).
+append([H|T],N,[H|S]):-append(T,N,S).
+
+
+
+%eliminamos un elemento X de la lista
+eliminar(_,[],[]):-fail.
+append(S,A,Lista1),
+eliminar(A,C,Lista2),
+dijkstra(A,F,Lista1,Lista2,L).
+eliminar(X,[X|R],R).
+eliminar(X,[C|R],[C|R1]):- eliminar(X,R,R1).
+
+
+*/
 
 
 
