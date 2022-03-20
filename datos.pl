@@ -15,8 +15,7 @@ aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
 
-%Arco (Aerolínea, Vuelo, AtoOrigen, AtoDestino, TiempoEstimado, Clase[EconómicaNegocios-Ambas], Costo)
-%
+
 arco(delta,dt1097,argentina,chile,1,ambas,350).
 arco(delta,dt1079,chile,argentina,1,ambas,350).
 arco(delta,dt1087,brazil,chile,4,economica,550).

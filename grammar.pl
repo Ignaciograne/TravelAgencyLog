@@ -45,6 +45,8 @@ presupuesto(T2):-
 	; write('No he podido entenderte. Introduce el presupuesto por favor: \n'),
     	presupuesto(T2).
 
+obtenerN(N,Lista,X):- 
+	nth0(N,Lista,X).
 
 iniciar():-
 	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
@@ -65,8 +67,8 @@ iniciar():-
 	presupuesto(T),
 
 	write(P), write(' '), write(Q), write(' '), write(R),
-	write(' '), write(S), write(' '), write(T).
+	write(' '), write(S), write(' '), write(T),
 
 
-
+	tirar_todo([P,Q,R,S,T]).
 
