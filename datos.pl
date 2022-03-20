@@ -22,11 +22,6 @@ Arco (Aerolínea,
       Clase[Económica-Negocios-Ambas],
       Costo)
 */
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 98731990557095ff1c4a29004bcbfd1a6941d5bc
 arco(delta,dt1097,argentina,chile,1,ambas,350).
 arco(delta,dt1079,chile,argentina,1,ambas,350).
 arco(delta,dt1087,brazil,chile,4,economica,550).

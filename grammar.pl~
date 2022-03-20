@@ -37,9 +37,9 @@ preferencia_clase(Clase):-
 
 presupuesto(Presupuesto):-
 	write('Ingresa tu presupuesto \n'),
-	readln(Respuesta,_,_,_,lowercase),
+	readln(Respuesta),
 	miembro(Presupuesto,Respuesta),
-	number(Presupuesto), !
+	number(Respuesta), !
 	; write('No he podido entenderte. \n'),
 	presupuesto(Presupuesto).
 
