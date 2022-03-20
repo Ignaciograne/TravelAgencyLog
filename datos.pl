@@ -115,12 +115,3 @@ es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
 
 
-
-
-
-
-
-
-
-
-
