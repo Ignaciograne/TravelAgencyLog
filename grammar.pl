@@ -46,6 +46,9 @@ presupuesto(T2):-
 tomarInfo(Origen,Destino,Respuesta):-
 	validar_destino(Origen,Destino,Respuesta).
 
+obtenerN(N,Lista,X):- 
+	nth0(N,Lista,X).
+
 tomarInfo(Origen,Destino,_):-
 	viajar_hasta(Origen,Destino).
 
@@ -87,20 +90,7 @@ iniciar():-
 	tomarAero(Aerolinea,Respuesta),
 	tomarClase(Clase,Respuesta),
 	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase).
-	/*
+	
 
-	write('Tiene usted alguna aerolinea de preferencia? \n'),
-	preferencia_aerolinea(Aerolinea),
-
-	write('Cuenta con alguna clase de preferencia? \n'),
-	preferencia_clase(Clase),
-
-	write('Tiene usted algún presupuesto? \n'),
-	presupuesto(Presupuesto),
-
-	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea),
-	write(' '), write(Clase), write(' '), write(Presupuesto).*/
-
-
-
+	tirar_todo([Origen,Destino,Aerolinea,Clase,400]).
 
