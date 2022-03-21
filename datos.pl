@@ -13,23 +13,57 @@ aerolinea(avianca). %av | 12
 aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
+<<<<<<< HEAD
 
 
 
 arco(delta,dt1097,argentina,chile,1,ambas,350).
 arco(delta,dt1079,chile,argentina,1,ambas,350).
+=======
+/*
+Arco (Aerolínea,
+      Vuelo,
+      AtoOrigen,
+      AtoDestino,
+      TiempoEstimado,
+      Clase[Económica-Negocios-Ambas],
+      Costo)
+*/
+
+arco(delta,dt1097,argentina,chile,1,economica,350).
+arco(delta,dt1097,argentina,chile,1,negocios,450).
+
+arco(delta,dt1079,chile,argentina,1,economica,350).
+arco(delta,dt1079,chile,argentina,1,negocios,500).
+
+>>>>>>> 1c266565e893a6235671ed0d50f373a5151e07df
 arco(delta,dt1087,brazil,chile,4,economica,550).
-arco(delta,dt1074,chile,colombia,3,ambas,450).
+
+arco(delta,dt1074,chile,colombia,3,economica,450).
+arco(delta,dt1074,chile,colombia,3,negocios,450).
+
 arco(delta,dt1067,peru,chile,2,economica,300).
 arco(delta,dt1084,brazil,colombia,4,negocios,700).
 arco(delta,dt1048,colombia,brazil,4,negocios,700).
-arco(delta,dt1048,colombia,venezuela,4,negocios,500).
-arco(delta,dt1048,colombia,peru,4,economico,350).
-arco(delta,dt1058,venezuela,brazil,4,economico,400).
-arco(delta,dt1061,peru,mexico,7,ambas,650).
-arco(delta,dt1012,mexico,canada,8,ambas,800).
+
+arco(delta,dt1048,colombia,venezuela,4,economica,450).
+arco(delta,dt1048,colombia,venezuela,4,negocios,600).
+
+
+arco(delta,dt1048,colombia,peru,4,economica,350).
+arco(delta,dt1058,venezuela,brazil,4,economica,400).
+
+arco(delta,dt1061,peru,mexico,7,economica,600).
+arco(delta,dt1061,peru,mexico,7,negocios,800).
+
+arco(delta,dt1012,mexico,canada,8,economica,700).
+arco(delta,dt1012,mexico,canada,8,negocios,850).
+
 arco(delta,dt1023,canada,costa_rica,10,negocios,1100).
-arco(delta,dt1034,costa_rica,colombia,3,ambas,500).
+
+arco(delta,dt1034,costa_rica,colombia,3,economica,400).
+arco(delta,dt1034,costa_rica,colombia,3,negocios,550).
+
 
 
 arco(avianca,av1297,argentina,chile,2,economico,300).
@@ -47,9 +81,9 @@ arco(avianca,av1234,costa_rica,colombia,4,economico,400).
 
 arco(copa,cp1397,argentina,chile,3,ambas,300).
 arco(copa,cp1379,chile,argentina,3,ambas,300).
-arco(copa,cp1387,brazil,chile,5,economica,500).
+arco(copa,cp1387,brazil,chile,5,economico,500).
 arco(copa,cp1374,chile,colombia,2,ambas,400).
-arco(copa,cp1367,peru,chile,3,economica,250).
+arco(copa,cp1367,peru,chile,3,economico,250).
 arco(copa,cp1384,brazil,colombia,6,negocios,500).
 arco(copa,cp1348,colombia,brazil,6,negocios,600).
 arco(copa,cp1358,venezuela,brazil,3,economico,350).
@@ -74,26 +108,47 @@ arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
 
 
+%(Aerolínea,Vuelo,AtoOrigen,AtoDestino,TiempoEstimado,Clase[Económica-Negocios-Ambas],Costo)
+%origen, destino, aerolinea,clase,presupuesto
 %mas barato
-path(X, Y, N, Path) :- path(X, Y, N, [], Path).
+path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Rutas) :-
+    path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, [], Rutas).
 
-path(X, Y, N, Seen, [X]) :-
-    \+ memberchk(X, Seen),
-    arco(_, _, X, Y, _, _, N).
-path(X, Z, N, Seen, [X|T]) :-
-    \+ memberchk(X, Seen),
-    arco(_, _, X, Y, _, _, N0),
-    path(Y, Z, N1, [X|Seen], T),
-    \+ memberchk(X, T),
-    N is N0 + N1.
+path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, NodosVisitados,
+     [[Aerolinea, Vuelo, Origen, Destino, Tiempo, Clase, Costo]]) :-
+
+    \+ memberchk(Origen, NodosVisitados),
+    arco(Aerolinea, Vuelo, Origen, Destino, Tiempo, Clase, Costo),
+    Presupuesto >= Costo.
 
 
-uniq_shortest_path(X, Y, MinCost, Path) :-
-    path(X, Y, MinCost, Path),
-    \+ (path(X, Y, LowerCost, OtherPath),
-        OtherPath \= Path,
-        LowerCost =< MinCost).
+path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, NodosVisitados,
+     [[Aerolinea, Vuelo,Origen,Escala,Tiempo0,Clase,Costo0]|Cola]) :-
 
+    \+ memberchk(Origen, NodosVisitados),
+    arco(Aerolinea, Vuelo, Origen, Escala, Tiempo0, Clase, Costo0),
+    path(Escala, Destino, Aerolinea, Clase, Presupuesto, Costo1, Tiempo1, [Origen|NodosVisitados], Cola),
+    \+ memberchk(Origen, Cola),
+    Costo is Costo0 + Costo1,
+    Tiempo is Tiempo0 + Tiempo1,
+    \+ fuera_de_presupuesto(Presupuesto, Costo).
+
+/*define presupuesto*/
+camino_barato(Origen, Destino, Aerolinea, Clase, Presupuesto,Costo, Ruta) :-
+    path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo,_, Ruta),
+    \+ (path(Origen, Destino, Aerolinea, Clase, Presupuesto, CostoBajo,_, OtraRuta),
+        OtraRuta \= Ruta,
+        CostoBajo =< Costo).
+
+/*Prepuesto no*/
+camino_rapido(Origen, Destino, Aerolinea, Clase, Presupuesto,Tiempo, Ruta) :-
+    path(Origen, Destino, Aerolinea, Clase, Presupuesto, _, Tiempo, Ruta),
+    \+ (path(Origen, Destino, Aerolinea, Clase, Presupuesto, _,TiempoBajo, OtraRuta),
+        OtraRuta \= Ruta,
+        TiempoBajo =< Tiempo).
+
+
+fuera_de_presupuesto(Presupuesto , Costo) :- not(Presupuesto >= Costo), write('Presupuesto insuficiente. \n').
 
 es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
@@ -106,6 +161,16 @@ es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
 
 % Clases
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
+
+concatenar([],L,L).
+concatenar([X|L1],L2,[X|L3]):- concatenar(L1,L2,L3).
+
+
+
+
+
+
+
 
 
 

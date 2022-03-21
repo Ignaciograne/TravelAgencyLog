@@ -20,7 +20,7 @@ preposiciones-->[para].
 preposiciones-->[por].
 preposiciones-->[segun].
 preposiciones-->[sin].
-preposiciones-->[so].
+preposiciones-->[con].
 preposiciones-->[sobre].
 preposiciones-->[tras].
 preposiciones-->[versus].
@@ -92,31 +92,6 @@ pronombres-->[se].
 pronombres-->[nos].
 pronombres-->[mi].
 
-% Locales de la ciudad
-local-->[tienda].
-local-->[pulperia].
-local-->[supermercado].
-local-->[cine].
-local-->[farmacia].
-local-->[hospital].
-local-->[clinica].
-local-->[gimnasio].
-local-->[parque].
-local-->[municipalidad].
-local-->[banco].
-local-->[plaza].
-local-->[mall].
-local-->[centro].
-local-->[comercial].
-local-->[registro].
-local-->[carniceria].
-local-->[verduleria].
-local-->[puerto].
-local-->[piscina].
-local-->[ferreteria].
-local-->[automercado].
-local-->[casa].
-
 % Adverbios
 adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[finalmente];[claro];[].
 
@@ -129,18 +104,16 @@ adjetivos-->[ultimo];[primero];[intermedio];[].
 % Oraciones
 oracion --> sintagma_nominal, sintagma_verbal.
 
-oracion--> adverbio.
+oracion --> adverbio.
 
 % Definicion de sintagma
 sintagma_nominal-->[].
 
 sintagma_nominal --> pronombres.
 
-sintagma_nominal --> preposiciones,puntuacion, articulo, puntuacion,local.
-
 sintagma_nominal --> preposiciones, sustantivos.
 
-sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposiciones, puntuacion,{es_informacion(X)},[X].
+sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposiciones, puntuacion,{es_informacion(X)},[X],sintagma_nominal.
 
 sintagma_verbal --> adverbio, puntuacion, pronombres ,puntuacion, adjetivos, puntuacion, sustantivos, puntuacion, verbo, puntuacion, conjuncion, puntuacion, preposiciones, puntuacion, infinitivo,puntuacion, conjuncion, puntuacion, sintagma_nominal.
 
@@ -149,4 +122,19 @@ es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
 
 
 es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
