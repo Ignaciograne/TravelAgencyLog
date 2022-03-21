@@ -125,12 +125,14 @@ path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Seen,
     Tiempo is Tiempo0 + Tiempo1,
     \+ fuera_de_presupuesto(Presupuesto, Costo).
 
+/*define presupuesto*/
 camino_barato(Origen, Destino, Aerolinea, Clase, Presupuesto,Costo, Ruta) :-
     path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo,_, Ruta),
     \+ (path(Origen, Destino, Aerolinea, Clase, Presupuesto, CostoBajo,_, OtraRuta),
         OtraRuta \= Ruta,
         CostoBajo =< Costo).
 
+/*Prepuesto no*/
 camino_rapido(Origen, Destino, Aerolinea, Clase, Presupuesto,Tiempo, Ruta) :-
     path(Origen, Destino, Aerolinea, Clase, Presupuesto, _, Tiempo, Ruta),
     \+ (path(Origen, Destino, Aerolinea, Clase, Presupuesto, _,TiempoBajo, OtraRuta),

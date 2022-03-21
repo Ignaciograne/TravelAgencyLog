@@ -1,10 +1,38 @@
 :-consult(gramatica).
 :-consult(datos).
 
-% Estos se tienen que cumplir para hacer la transferencia con exito
+%------------------Funciones para listas------------------
+
+/*
+	Variable N = índece solicitado
+	Variable Lista = Lista a evaluar
+	Variable X = Valor en índice solicitado
+	Retorna = Boolean
+	Toma una lista y un índice y retorna el valor ubicado en ese índice
+*/
+
+obtenerN(N,Lista,X):-
+	nth0(N,Lista,X).
+
+
+/*
+	Variable X = Elemento primero de la lista
+	Variable R = Resto de la lista
+	Retorna = Boolean
+	Verifica si un elemento dado está dentro de una lista, pasando uno por
+	uno recursicamente con su cola, al llegar a la verificación, retorna
+	true
+*/
 miembro(X,[X|_]).
 miembro(X,[_|R]):-miembro(X,R).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Respuesta = Representa inducida por el usario separado por comas
+	Retorna = Boolean
+	Solicita al usuario una respuesta a ser evaluada como oración válida y si hay alguna palabra que sea un origen evaluada en el grafo en el archivo datos
+*/
 viajar_desde(Origen,Respuesta):-
 	write('Ingrese su Origen \n'),
 	readln(Respuesta,_,_,_,lowercase),
@@ -14,6 +42,13 @@ viajar_desde(Origen,Respuesta):-
 	; write('No tenemos ese Origen disponible. \n'),
 	viajar_desde(Origen,Respuesta).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Destino = Representa el valor encontrado en los destinos de grafos
+	Retorna = Boolean
+	Solicita al usuario una respuesta para ser evaluada como oración válida, y se asignarán valores que satisfagan si alguna se satisface en Destinos y que Origen sea diferente a Destino.
+*/
 viajar_hasta(Origen,Destino):-
 	write('Ingrese su Destino \n.'),
 	readln(Respuesta,_,_,_,lowercase),
@@ -21,6 +56,13 @@ viajar_hasta(Origen,Destino):-
 	; write('No tenemos ese Destino disponible. \n'),
 	viajar_hasta(Origen, Destino).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Destino = Representa el valor encontrado en los destinos de grafos
+	Retorna = Boolean
+	Solicita al usuario una respuesta para ser evaluada como oración válida, y se asignarán valores que satisfagan si alguna se satisface en Destinos y que Origen sea diferente a Destino.
+*/
 preferencia_aerolinea(Aero):-
 	write('Ingrese su Aerolinea. \n'),
 	readln(Respuesta,_,_,_,lowercase),
@@ -44,8 +86,21 @@ presupuesto(Presupuesto):-
 	presupuesto(Presupuesto).
 
 
-obtenerN(N,Lista,X):-
-	nth0(N,Lista,X).
+validar_clase(Clase,Respuesta):-
+	miembro(Clase,Respuesta),
+	oracion(Respuesta,[]),
+	es_clase(Clase).
+
+validar_Aero(Aero,Respuesta):-
+	oracion(Respuesta,[]),
+	miembro(Aero,Respuesta),
+        es_aerolinea(Aero).
+
+validar_destino(Origen,Destino,Respuesta):-
+	oracion(Respuesta,[]),
+	miembro(Destino,Respuesta),
+	Origen\=Destino,
+	es_destino(Origen,Destino).
 
 
 tomarInfo(Origen,Destino,Respuesta):-
@@ -66,22 +121,6 @@ tomarClase(Clase,Respuesta):-
 tomarClase(Clase,_):-
 	preferencia_clase(Clase).
 
-validar_clase(Clase,Respuesta):-
-	miembro(Clase,Respuesta),
-	oracion(Respuesta,[]),
-	es_clase(Clase).
-
-validar_Aero(Aero,Respuesta):-
-	oracion(Respuesta,[]),
-	miembro(Aero,Respuesta),
-        es_aerolinea(Aero).
-
-validar_destino(Origen,Destino,Respuesta):-
-	oracion(Respuesta,[]),
-	miembro(Destino,Respuesta),
-	Origen\=Destino,
-	es_destino(Origen,Destino).
-
 iniciar():-
 	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
 	viajar_desde(Origen,Respuesta),
@@ -89,7 +128,9 @@ iniciar():-
 	tomarAero(Aerolinea,Respuesta),
 	tomarClase(Clase,Respuesta),
 	presupuesto(Presupuesto),
-	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).
+	camino_barato(Origen, Destino, Aerolinea,Clase,Presupuesto,_,Ruta),
+	write(Ruta).
+	/*write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).*/
 	/*tirar_todo([Origen,Destino,Aerolinea,Clase,400]).*/
 
 
