@@ -1,26 +1,68 @@
 :-consult(gramatica).
 :-consult(datos).
 
-% Estos se tienen que cumplir para hacer la transferencia con exito
+%------------------Funciones para listas------------------
+
+/*
+	Variable N = índece solicitado
+	Variable Lista = Lista a evaluar
+	Variable X = Valor en índice solicitado
+	Retorna = Boolean
+	Toma una lista y un índice y retorna el valor ubicado en ese índice
+*/
+
+obtenerN(N,Lista,X):-
+	nth0(N,Lista,X).
+
+
+/*
+	Variable X = Elemento primero de la lista
+	Variable R = Resto de la lista
+	Retorna = Boolean
+	Verifica si un elemento dado está dentro de una lista, pasando uno por
+	uno recursicamente con su cola, al llegar a la verificación, retorna
+	true
+*/
 miembro(X,[X|_]).
 miembro(X,[_|R]):-miembro(X,R).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Respuesta = Representa inducida por el usario separado por comas
+	Retorna = Boolean
+	Solicita al usuario una respuesta a ser evaluada como oración válida y si hay alguna palabra que sea un origen evaluada en el grafo en el archivo datos
+*/
 viajar_desde(Origen,Respuesta):-
 	write('Ingrese su Origen \n'),
 	readln(Respuesta,_,_,_,lowercase),
 	miembro(Origen,Respuesta),
 	oracion(Respuesta,[]),
 	es_origen(Origen), !
-	; write('No tenemos ese Origen disponible.'),
+	; write('No tenemos ese Origen disponible. \n'),
 	viajar_desde(Origen,Respuesta).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Destino = Representa el valor encontrado en los destinos de grafos
+	Retorna = Boolean
+	Solicita al usuario una respuesta para ser evaluada como oración válida, y se asignarán valores que satisfagan si alguna se satisface en Destinos y que Origen sea diferente a Destino.
+*/
 viajar_hasta(Origen,Destino):-
 	write('Ingrese su Destino \n.'),
 	readln(Respuesta,_,_,_,lowercase),
 	validar_destino(Origen,Destino,Respuesta), !
-	; write('No tenemos ese Destino disponible.'),
+	; write('No tenemos ese Destino disponible. \n'),
 	viajar_hasta(Origen, Destino).
 
+
+/*
+	Variable Origen = Representa el valor encontrado en los orígenes de grafos
+	Variable Destino = Representa el valor encontrado en los destinos de grafos
+	Retorna = Boolean
+	Solicita al usuario una respuesta para ser evaluada como oración válida, y se asignarán valores que satisfagan si alguna se satisface en Destinos y que Origen sea diferente a Destino.
+*/
 preferencia_aerolinea(Aero):-
 	write('Ingrese su Aerolinea. \n'),
 	readln(Respuesta,_,_,_,lowercase),
@@ -29,7 +71,7 @@ preferencia_aerolinea(Aero):-
 	preferencia_aerolinea(Aero).
 
 preferencia_clase(Clase):-
-	write('Ingrese su Clase [economica-ejecutiva-primera clase]. \n'),
+	write('Ingrese su Clase [economica-ejecutiva-charter]. \n'),
 	readln(Respuesta,_,_,_,lowercase),
 	validar_clase(Clase,Respuesta), !
 	; write('No tenemos esta clase disponible \n.'),
@@ -43,27 +85,6 @@ presupuesto(Presupuesto):-
 	; write('No he podido entenderte. \n'),
 	presupuesto(Presupuesto).
 
-
-obtenerN(N,Lista,X):-
-	nth0(N,Lista,X).
-
-tomarInfo(Origen,Destino,Respuesta):-
-	validar_destino(Origen,Destino,Respuesta).
-
-tomarInfo(Origen,Destino,_):-
-	viajar_hasta(Origen,Destino).
-
-tomarAero(Aero,Respuesta):-
-	validar_Aero(Aero,Respuesta).
-
-tomarAero(Aero,_):-
-	preferencia_aerolinea(Aero).
-
-tomarClase(Clase,Respuesta):-
-	validar_clase(Clase,Respuesta).
-
-tomarClase(Clase,_):-
-	preferencia_clase(Clase).
 
 validar_clase(Clase,Respuesta):-
 	miembro(Clase,Respuesta),
@@ -81,9 +102,25 @@ validar_destino(Origen,Destino,Respuesta):-
 	Origen\=Destino,
 	es_destino(Origen,Destino).
 
-/*preguntar([Origen,Destino]):-
-	viajar_desde(Origen,Respuesta),
-	validar().*/
+
+tomarInfo(Origen,Destino,Respuesta):-
+	validar_destino(Origen,Destino,Respuesta). /*se pueden validar todos en un solo tomar info o validarlos antes del validar_tal*/
+
+tomarInfo(Origen,Destino,_):-
+	viajar_hasta(Origen,Destino).
+
+tomarAero(Aero,Respuesta):-
+	validar_Aero(Aero,Respuesta).
+
+tomarAero(Aero,_):-
+	preferencia_aerolinea(Aero).
+
+tomarClase(Clase,Respuesta):-
+	validar_clase(Clase,Respuesta).
+
+tomarClase(Clase,_):-
+	preferencia_clase(Clase).
+
 iniciar():-
 	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
 	viajar_desde(Origen,Respuesta),
@@ -93,4 +130,11 @@ iniciar():-
 	presupuesto(Presupuesto),
 	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).
 	/*tirar_todo([Origen,Destino,Aerolinea,Clase,400]).*/
+
+
+
+
+
+
+
 

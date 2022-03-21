@@ -92,6 +92,7 @@ pronombres-->[se].
 pronombres-->[nos].
 pronombres-->[mi].
 
+% Locales de la ciudad
 % Adverbios
 adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[finalmente];[claro];[].
 
@@ -111,6 +112,8 @@ sintagma_nominal-->[].
 
 sintagma_nominal --> pronombres.
 
+sintagma_nominal --> preposiciones,puntuacion, articulo, puntuacion,{es_local(X)},[X].
+
 sintagma_nominal --> preposiciones, sustantivos.
 
 sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposiciones, puntuacion,{es_informacion(X)},[X],sintagma_nominal.
@@ -118,7 +121,7 @@ sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposicione
 sintagma_verbal --> adverbio, puntuacion, pronombres ,puntuacion, adjetivos, puntuacion, sustantivos, puntuacion, verbo, puntuacion, conjuncion, puntuacion, preposiciones, puntuacion, infinitivo,puntuacion, conjuncion, puntuacion, sintagma_nominal.
 
 
-es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
+es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X);es_local(X).
 
 
 es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).

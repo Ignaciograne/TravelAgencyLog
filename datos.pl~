@@ -22,11 +22,6 @@ Arco (Aerolínea,
       Clase[Económica-Negocios-Ambas],
       Costo)
 */
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 98731990557095ff1c4a29004bcbfd1a6941d5bc
 arco(delta,dt1097,argentina,chile,1,ambas,350).
 arco(delta,dt1079,chile,argentina,1,ambas,350).
 arco(delta,dt1087,brazil,chile,4,economica,550).
@@ -105,6 +100,9 @@ uniq_shortest_path(X, Y, MinCost, Path) :-
         OtherPath \= Path,
         LowerCost =< MinCost).
 
+local(tienda).
+local(pulperia).
+local(supermercado).
 
 es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
@@ -117,5 +115,7 @@ es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
 
 % Clases
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
+
+es_local(Local):- local(Local).
 
 

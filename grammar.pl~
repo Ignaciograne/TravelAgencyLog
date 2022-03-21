@@ -11,14 +11,14 @@ viajar_desde(Origen,Respuesta):-
 	miembro(Origen,Respuesta),
 	oracion(Respuesta,[]),
 	es_origen(Origen), !
-	; write('No tenemos ese Origen disponible.'),
+	; write('No tenemos ese Origen disponible. \n'),
 	viajar_desde(Origen,Respuesta).
 
 viajar_hasta(Origen,Destino):-
 	write('Ingrese su Destino \n.'),
 	readln(Respuesta,_,_,_,lowercase),
 	validar_destino(Origen,Destino,Respuesta), !
-	; write('No tenemos ese Destino disponible.'),
+	; write('No tenemos ese Destino disponible. \n'),
 	viajar_hasta(Origen, Destino).
 
 preferencia_aerolinea(Aero):-
@@ -29,7 +29,7 @@ preferencia_aerolinea(Aero):-
 	preferencia_aerolinea(Aero).
 
 preferencia_clase(Clase):-
-	write('Ingrese su Clase [economica-ejecutiva-primera clase]. \n'),
+	write('Ingrese su Clase [economica-ejecutiva-charter]. \n'),
 	readln(Respuesta,_,_,_,lowercase),
 	validar_clase(Clase,Respuesta), !
 	; write('No tenemos esta clase disponible \n.'),
@@ -37,9 +37,9 @@ preferencia_clase(Clase):-
 
 presupuesto(Presupuesto):-
 	write('Ingresa tu presupuesto \n'),
-	readln(Respuesta),
+	readln(Respuesta,_,_,_,lowercase),
 	miembro(Presupuesto,Respuesta),
-	number(Respuesta), !
+	number(Presupuesto), !
 	; write('No he podido entenderte. \n'),
 	presupuesto(Presupuesto).
 
@@ -47,8 +47,9 @@ presupuesto(Presupuesto):-
 obtenerN(N,Lista,X):-
 	nth0(N,Lista,X).
 
+
 tomarInfo(Origen,Destino,Respuesta):-
-	validar_destino(Origen,Destino,Respuesta).
+	validar_destino(Origen,Destino,Respuesta). /*se pueden validar todos en un solo tomar info o validarlos antes del validar_tal*/
 
 tomarInfo(Origen,Destino,_):-
 	viajar_hasta(Origen,Destino).
@@ -81,9 +82,6 @@ validar_destino(Origen,Destino,Respuesta):-
 	Origen\=Destino,
 	es_destino(Origen,Destino).
 
-/*preguntar([Origen,Destino]):-
-	viajar_desde(Origen,Respuesta),
-	validar().*/
 iniciar():-
 	write('Bienvenido a TravelAgencyLog, la mejor logica de llegar a su destino. \n'),
 	viajar_desde(Origen,Respuesta),
@@ -93,4 +91,11 @@ iniciar():-
 	presupuesto(Presupuesto),
 	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).
 	/*tirar_todo([Origen,Destino,Aerolinea,Clase,400]).*/
+
+
+
+
+
+
+
 
