@@ -1,127 +1,118 @@
+/*
+Sintaxis del español por
+Andy Ramírez Fonseca
+Ignacio Grané
+Juan Rodríguez*/
 
-%Anï¿½lisis de lenguaje estructura
+/*Consulta a grafo*/
 :-consult(datos).
-%Signos de puntuacio Definidos
-% Analisis de lenguaje estructura
-% Signos de puntuacion definidos
-puntuacion-->[,];[].
 
-% Preposiciones
-preposiciones-->[].
-preposiciones-->[a].
-preposiciones-->[ante].
-preposiciones-->[de].
-preposiciones-->[en].
-preposiciones-->[entre].
-preposiciones-->[hacia].
-preposiciones-->[hasta].
-preposiciones-->[mediante].
-preposiciones-->[para].
-preposiciones-->[por].
-preposiciones-->[segun].
-preposiciones-->[sin].
-preposiciones-->[con].
-preposiciones-->[sobre].
-preposiciones-->[tras].
-preposiciones-->[versus].
-preposiciones-->[al].
-preposiciones-->[del].
-preposiciones-->[desde].
+/*El operador funciona como ([_|R],R) donde puede tomar cuál forma de las definidas
+Siempre peuden ser vacías en caso de no existir*/
 
-% Articulos
-articulo-->[].
-articulo-->[el].
-articulo-->[la].
-articulo-->[las].
-articulo-->[lo].
-articulo-->[los].
-articulo-->[un].
-articulo-->[unos].
-articulo-->[una].
-articulo-->[unas].
-articulo-->[al].
-articulo-->[del].
+/*Verbos congujados en presente simple y futuro simple*/
+verbo--> [dirijo];[diriges];[dirige];[dirigimos];[dirigen].
+verbo--> [dirigire];[dirigiras];[dirigira];[digiremos];[dirigiran];[dirigirnos].
+verbo--> [desplazo];[desplazas];[desplaza];[desplazamos];[desplazan].
+verbo--> [desplazare];[desplazaras];[desplazara];[desplazaremos].
+verbo--> [estoy];[estas];[esta];[estamos];[estan].
+verbo--> [estare];[estaras];[estara];[estaremos];[estaran];[estado].
+verbo--> [encuentro];[encuentras];[encuentra];[encontramos];[encuentran].
+verbo--> [gusta];[gustaria];[gustan];[gustarian].
+verbo--> [voy];[vas];[va];[vamos];[van].
+verbo--> [ire];[iras];[ira];[iremos];[iran].
+verbo--> [llego];[lelgas];[llega];[llegamos];[llegan].
+verbo--> [llegare];[llegaras];[llegara];[llegaremos];[llegaran].
+verbo--> [muevo];[mueves];[mueve];[movemos];[mueven].
+verbo--> [movere];[moveras];[movera];[moveremos];[moveran].
+verbo--> [necesito];[necesitas];[necesita];[necesitamos];[necesitan].
+verbo--> [necesitare];[necesitaras];[necesitara];[necesitaremos];[necesitaran].
+verbo--> [ocupo];[ocupas];[ocupa];[ocupamos];[ocupan].
+verbo--> [ocuparé];[ocuparas];[ocupara];[ocuparemos];[ocuparan].
+verbo--> [quiero];[queres];[quiere];[queremos];[quieren].
+verbo--> [querra];[querras];[querrá];[querremos];[querran].
+verbo--> [salgo];[salis];[sale];[salimos];[salen].
+verbo--> [saldre];[saldria];[saldra];[saldremos];[saldran].
+verbo--> [tengo];[tenes];[tiene];[tenemos];[tienen].
+verbo--> [tendre];[tendras];[tendra];[tendremos];[tendran].
+verbo--> [vengo];[vienes];[viene];[venimos];[venis];[venimos];[vienen].
+verbo--> [vendre];[vendras];[vendran];[vendra];[vendremos].
+verbo--> [viajo];[viajas];[viaja];[viajamos];[viajan].
+verbo--> [viajare];[viajaras];[viajara];[viajaremos];[viajaran].
+verbo--> [vuelvo];[vuelvas];[vuelve];[volvemos];[vuelven].
+verbo--> [volvere];[volverias];[volvera];[volveremos];[volveran].
+verbo--> [].
 
-% Sustantivos
-sustantivos-->[destino];[avion];[].
 
-% Verbos
-verbo-->[].
-verbo-->[viaje];[viajo];[viajamos];[viajaremos].
-verbo-->[voy];[vaya];[va];[vamos];[vayan];[vengo];[van].
-verbo-->[pase];[paso];[pasare];[pasaria];[pasase].
-verbo-->[llego];[llegue];[llegare];[llegan].
-verbo-->[dirijo]; [dirigimos]; [dirigiste];[dirigire];[dirigiria];[dirigirme];[dirigirnos].
-verbo-->[traslado]; [trasladamos]; [trasladare]; [trasladaremos];[trasladarme];[trasladarnos].
-verbo-->[muevo];[movi];[movere];[moveremos];[moverme];[movernos].
-verbo-->[acudi];[acudire];[acudo];[acudiremos];[acudiran].
-verbo-->[asisto];[asistire];[asitiremos];[asistimos].
-verbo-->[recorro];[recorrere];[recorreremos];[recorremos].
-verbo-->[quiero];[queremos];[quisiera];[quiere].
-verbo-->[estoy];[estamos];[estan],[estaria].
-verbo-->[soy];[es];[eres].
-verbo-->[encuentro];[encontramos];[encuentra];[encontrarme];[encontrarnos].
-verbo-->[necesito];[necesitamos].
-verbo-->[ocupo];[ocupamos];[ocuparemos];[ocupare].
-verbo-->[gusta];[gustaria];[gustan].
-verbo-->[tengo];[tenemos];[tendria];[tendriamos].
-verbo-->[ubica];[ubicamos];[ubican];[ubico].
-verbo-->[queda];[quedo];[quedan];[quedarme];[quedarnos];[quedaremos].
-verbo-->[desplazo];[desplaza];[desplazaremos];[desplazare];[desplazarme];[desplazarnos];[desplazaremos].
-
-% Infinitivos
+/*Verbos infinitivos*/
 infinitivo-->[].
-infinitivo-->[ir];[viajar];[venir];[pasar];[llegar];[trasladar].
-infinitivo-->[mover];[acudir];[asistir];[recorrer];[querer];[estar].
-infinitivo-->[encontrar];[necesitar];[dirigir],[gustar];[tener];[ubicar].
-infinitivo-->[desplazar].
+infinitivo-->[dirigir];[desplazar];[estar];[encontrar];[gustar];[ir];[llegar].
+infinitivo-->[mover];[necesitar];[ocupar];[querer];[salir].
+infinitivo-->[tener];[venir];[viajar];[volver].
 
-% Clases
-clase --> [economica];[negocios].
 
-% Pronombres
-pronombres-->[].
-pronombres-->[yo].
-pronombres-->[nosotros].
-pronombres-->[el].
-pronombres-->[ella].
-pronombres-->[ellas].
-pronombres-->[ellos].
-pronombres-->[me].
-pronombres-->[se].
-pronombres-->[nos].
-pronombres-->[mi].
+/*Pronombres personales*/
+pronombre-->[].
+pronombre-->[yo];[tu];[vos];[usted];[nosotros];[nosotras];[ellos];[ellas];[ustedes];[el];[ella].
+pronombre-->[me];[mi];[te];[ti];[si];[se];[nos].
 
-% Adverbios
-adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[finalmente];[claro];[].
 
-% Conjunciones
+/*Preposiciones más usadas*/
+preposicion-->[];[a];[al];[ante];[bajo];[con];[contra];[de];[del];[desde];[en];[entre];[hacia];[hasta].
+preposicion-->[durante];[mediante];[para];[por];[pro];[sin];[so];[según];[sobre];[tras];[versus];[via].
+
+
+/*Artículos*/
+articulo-->[].
+articulo-->[el];[lo];[los];[un];[unos].
+articulo-->[la];[las];[una];[unas].
+articulo-->[al];[del].
+
+/*Posibles sustantivos dentro de desplazamientos*/
+sustantivos-->[destino];[avion];[origen];[aerolinea];[clase];[presupuesto];[lugar];[pais];[ciudad];[dolares];[viaje];[vacaciones];[actividad];[navidad];[].
+
+
+/*Adverbios: funcionan para respuetas concretas*/
+adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[claro];[].
+
+
+/*Adjetivos: En caso de varios pasos*/
+adjetivo--> [primero];[luego];[].
+
+
+/*Conjunciones*/
 conjuncion-->[que];[].
 
-% Adjetivos
-adjetivos-->[ultimo];[primero];[intermedio];[].
 
-% Oraciones
+/*Signos de puntuación*/
+signo-->[,];[.];[!];[$];[].
+
+
+/*Sintagmas utilizados en una oración*/
+sintagma_nominal-->[].
+sintagma_nominal --> pronombre.
+sintagma_nominal --> preposicion,signo, articulo, signo.
+sintagma_nominal --> preposicion,signo,sustantivos.
+sintagma_nominal --> preposicion,signo, articulo,signo, preposicion,signo,{es_informacion(X)},[X],sintagma_nominal.
+
+sintagma_verbal --> adverbio,signo, pronombre ,signo, adjetivo,signo, sustantivos,signo, verbo, signo, conjuncion, signo, preposicion, signo, infinitivo,signo, conjuncion, signo, sintagma_nominal.
+
+
+/*
+      Entrada X = Palabra sin reconocer en la estrucura de sintagmas
+      Verifica si esta palabra pertenece a alguna información dentro del
+      grafo.*/
+es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
+es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).
+
+
+/*    Entrada (oración,[]) = Respuesta del usuario.
+      Verifica que todas las palabras dentro de la oración sean válidas.
+      Puede ser una oración completa, o solo un sí, no, ninguno etc.*/
 oracion --> sintagma_nominal, sintagma_verbal.
-
 oracion --> adverbio.
 
-% Definicion de sintagma
-sintagma_nominal-->[].
 
-sintagma_nominal --> pronombres.
-
-sintagma_nominal --> preposiciones, sustantivos.
-
-sintagma_nominal --> preposiciones,puntuacion, articulo,puntuacion, preposiciones, puntuacion,{es_informacion(X)},[X],sintagma_nominal.
-
-sintagma_verbal --> adverbio, puntuacion, pronombres ,puntuacion, adjetivos, puntuacion, sustantivos, puntuacion, verbo, puntuacion, conjuncion, puntuacion, preposiciones, puntuacion, infinitivo,puntuacion, conjuncion, puntuacion, sintagma_nominal.
-
-
-es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
-
-
-es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).
 
 
 

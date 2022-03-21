@@ -13,6 +13,13 @@ aerolinea(avianca). %av | 12
 aerolinea(copa). %cp | 13
 aerolinea(jetsmart). %js | 14
 
+<<<<<<< HEAD
+
+
+
+arco(delta,dt1097,argentina,chile,1,ambas,350).
+arco(delta,dt1079,chile,argentina,1,ambas,350).
+=======
 /*
 Arco (Aerolínea,
       Vuelo,
@@ -29,6 +36,7 @@ arco(delta,dt1097,argentina,chile,1,negocios,450).
 arco(delta,dt1079,chile,argentina,1,economica,350).
 arco(delta,dt1079,chile,argentina,1,negocios,500).
 
+>>>>>>> 1c266565e893a6235671ed0d50f373a5151e07df
 arco(delta,dt1087,brazil,chile,4,economica,550).
 
 arco(delta,dt1074,chile,colombia,3,economica,450).
@@ -57,7 +65,7 @@ arco(delta,dt1034,costa_rica,colombia,3,economica,400).
 arco(delta,dt1034,costa_rica,colombia,3,negocios,550).
 
 
-/*
+
 arco(avianca,av1297,argentina,chile,2,economico,300).
 arco(avianca,av1279,chile,argentina,2,ambas,350).
 arco(avianca,av1287,brazil,chile,6,negocios,700).
@@ -97,7 +105,7 @@ arco(jetsmart,js1412,mexico,canada,7,ambas,800).
 arco(jetsmart,js1423,canada,costa_rica,8,negocios,1300).
 arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
-*/
+
 
 
 %(Aerolínea,Vuelo,AtoOrigen,AtoDestino,TiempoEstimado,Clase[Económica-Negocios-Ambas],Costo)
