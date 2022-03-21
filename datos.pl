@@ -78,9 +78,8 @@ arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 
 
 
-%(Aerolínea,Vuelo,AtoOrigen,AtoDestino,TiempoEstimado,Clase[Económica-Negocios-Ambas],Costo)
-%origen, destino, aerolinea,clase,presupuesto
-%mas barato
+% origen, destino, aerolinea,clase,presupuesto
+% mas barato
 path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Rutas) :-
     path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, [], Rutas).
 

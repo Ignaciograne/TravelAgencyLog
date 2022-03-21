@@ -1,14 +1,14 @@
 /*
-Sintaxis del español por
-Andy Ramírez Fonseca
-Ignacio Grané
-Juan Rodríguez*/
+Sintaxis del espaniol por
+Andy Ramirez Fonseca
+Ignacio Grane
+Juan Rodriguez*/
 
 /*Consulta a grafo*/
 :-consult(datos).
 
-/*El operador funciona como ([_|R],R) donde puede tomar cuál forma de las definidas
-Siempre peuden ser vacías en caso de no existir*/
+/*El operador funciona como ([_|R],R) donde puede tomar cual forma de las definidas
+Siempre peuden ser vacias en caso de no existir*/
 
 /*Verbos congujados en presente simple y futuro simple*/
 verbo--> [dirijo];[diriges];[dirige];[dirigimos];[dirigen].
@@ -28,9 +28,9 @@ verbo--> [movere];[moveras];[movera];[moveremos];[moveran].
 verbo--> [necesito];[necesitas];[necesita];[necesitamos];[necesitan].
 verbo--> [necesitare];[necesitaras];[necesitara];[necesitaremos];[necesitaran].
 verbo--> [ocupo];[ocupas];[ocupa];[ocupamos];[ocupan].
-verbo--> [ocuparé];[ocuparas];[ocupara];[ocuparemos];[ocuparan].
+verbo--> [ocupare];[ocuparas];[ocupara];[ocuparemos];[ocuparan].
 verbo--> [quiero];[queres];[quiere];[queremos];[quieren].
-verbo--> [querra];[querras];[querrá];[querremos];[querran].
+verbo--> [querra];[querras];[querra];[querremos];[querran].
 verbo--> [salgo];[salis];[sale];[salimos];[salen].
 verbo--> [saldre];[saldria];[saldra];[saldremos];[saldran].
 verbo--> [tengo];[tenes];[tiene];[tenemos];[tienen].
@@ -57,12 +57,12 @@ pronombre-->[yo];[tu];[vos];[usted];[nosotros];[nosotras];[ellos];[ellas];[usted
 pronombre-->[me];[mi];[te];[ti];[si];[se];[nos].
 
 
-/*Preposiciones más usadas*/
+/*Preposiciones mas usadas*/
 preposicion-->[];[a];[al];[ante];[bajo];[con];[contra];[de];[del];[desde];[en];[entre];[hacia];[hasta].
-preposicion-->[durante];[mediante];[para];[por];[pro];[sin];[so];[según];[sobre];[tras];[versus];[via].
+preposicion-->[durante];[mediante];[para];[por];[pro];[sin];[so];[segun];[sobre];[tras];[versus];[via].
 
 
-/*Artículos*/
+/*Articulos*/
 articulo-->[].
 articulo-->[el];[lo];[los];[un];[unos].
 articulo-->[la];[las];[una];[unas].
@@ -84,11 +84,11 @@ adjetivo--> [primero];[luego];[].
 conjuncion-->[que];[].
 
 
-/*Signos de puntuación*/
+/*Signos de puntuacion*/
 signo-->[,];[.];[!];[$];[].
 
 
-/*Sintagmas utilizados en una oración*/
+/*Sintagmas utilizados en una oracion*/
 sintagma_nominal-->[].
 sintagma_nominal --> pronombre.
 sintagma_nominal --> preposicion,signo, articulo, signo.
@@ -100,15 +100,15 @@ sintagma_verbal --> adverbio,signo, pronombre ,signo, adjetivo,signo, sustantivo
 
 /*
       Entrada X = Palabra sin reconocer en la estrucura de sintagmas
-      Verifica si esta palabra pertenece a alguna información dentro del
+      Verifica si esta palabra pertenece a alguna informacion dentro del
       grafo.*/
 es_informacion(X):- es_aerolinea(X);es_clase(X);es_lugar(X).
 es_lugar(Lugar):- arco(_,_,Lugar,_,_,_,_), arco(_,_,_,Lugar,_,_,_).
 
 
-/*    Entrada (oración,[]) = Respuesta del usuario.
-      Verifica que todas las palabras dentro de la oración sean válidas.
-      Puede ser una oración completa, o solo un sí, no, ninguno etc.*/
+/*    Entrada (oracion,[]) = Respuesta del usuario.
+      Verifica que todas las palabras dentro de la oracion sean validas.
+      Puede ser una oracion completa, o solo un si, no, ninguno etc.*/
 oracion --> sintagma_nominal, sintagma_verbal.
 oracion --> adverbio.
 
