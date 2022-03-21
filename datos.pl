@@ -106,20 +106,20 @@ arco(jetsmart,js1434,costa_rica,colombia,4,ambas,500).
 path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Rutas) :-
     path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, [], Rutas).
 
-path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Seen,
-     [Aerolinea, Vuelo, Origen, Destino, Tiempo, Clase, Costo]) :-
+path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, NodosVisitados,
+     [[Aerolinea, Vuelo, Origen, Destino, Tiempo, Clase, Costo]]) :-
 
-    \+ memberchk(Origen, Seen),
+    \+ memberchk(Origen, NodosVisitados),
     arco(Aerolinea, Vuelo, Origen, Destino, Tiempo, Clase, Costo),
     Presupuesto >= Costo.
 
 
-path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Seen,
+path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, NodosVisitados,
      [[Aerolinea, Vuelo,Origen,Escala,Tiempo0,Clase,Costo0]|Cola]) :-
 
-    \+ memberchk(Origen, Seen),
+    \+ memberchk(Origen, NodosVisitados),
     arco(Aerolinea, Vuelo, Origen, Escala, Tiempo0, Clase, Costo0),
-    path(Escala, Destino, Aerolinea, Clase, Presupuesto, Costo1, Tiempo1, [Origen|Seen], Cola),
+    path(Escala, Destino, Aerolinea, Clase, Presupuesto, Costo1, Tiempo1, [Origen|NodosVisitados], Cola),
     \+ memberchk(Origen, Cola),
     Costo is Costo0 + Costo1,
     Tiempo is Tiempo0 + Tiempo1,
@@ -153,6 +153,9 @@ es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
 
 % Clases
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
+
+concatenar([],L,L).
+concatenar([X|L1],L2,[X|L3]):- concatenar(L1,L2,L3).
 
 
 

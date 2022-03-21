@@ -115,7 +115,7 @@ path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Seen,
 
 
 path(Origen, Destino, Aerolinea, Clase, Presupuesto, Costo, Tiempo, Seen,
-     [[Aerolinea, Vuelo,Origen,Escala,Tiempo0,Clase,Costo0]|Cola]) :-
+     [[Aerolinea, Vuelo,Origen,Escala,Tiempo0,Clase,Costo0]|[Cola]]) :-
 
     \+ memberchk(Origen, Seen),
     arco(Aerolinea, Vuelo, Origen, Escala, Tiempo0, Clase, Costo0),
@@ -140,7 +140,7 @@ camino_rapido(Origen, Destino, Aerolinea, Clase, Presupuesto,Tiempo, Ruta) :-
         TiempoBajo =< Tiempo).
 
 
-fuera_de_presupuesto(Presupuesto , Costo) :- not(Presupuesto >= Costo), write('Presupuesto insuficiente. \n'),!.
+fuera_de_presupuesto(Presupuesto , Costo) :- not(Presupuesto >= Costo), write('Presupuesto insuficiente. \n').
 
 es_origen(Ubicacion):-arco(_,_,Ubicacion,_,_,_,_).
 
@@ -153,6 +153,9 @@ es_aerolinea(Aerolinea):- arco(Aerolinea,_,_,_,_,_,_).
 
 % Clases
 es_clase(Clase):-arco(_,_,_,_,_,Clase,_).
+
+concatenar([],L,L).
+concatenar([X|L1],L2,[X|L3]):- concatenar(L1,L2,L3).
 
 
 

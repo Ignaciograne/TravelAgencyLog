@@ -127,10 +127,10 @@ iniciar():-
 	tomarInfo(Origen,Destino,Respuesta),
 	tomarAero(Aerolinea,Respuesta),
 	tomarClase(Clase,Respuesta),
-	presupuesto(Presupuesto),!,
-	camino_barato(Origen, Destino, Aerolinea,Clase,Presupuesto,_,Ruta),
-	write(Ruta).
-	/*write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).*/
+	presupuesto(Presupuesto),
+	/*camino_barato(Origen, Destino, Aerolinea,Clase,Presupuesto,_,Ruta),!*/
+
+	write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).
 	/*tirar_todo([Origen,Destino,Aerolinea,Clase,400]).*/
 
 
