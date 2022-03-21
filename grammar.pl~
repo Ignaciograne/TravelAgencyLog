@@ -203,7 +203,8 @@ respuesta(A, B, C, D, E):-
 	write('. El tiempo estimado es de '),
 	write(E),
 	write('.'),
-	write('\n').
+	write('\n'),
+	write('Muchas gracias por utilizar TravelAgencyLog').
 
 recorrer([Lista|Resto]):-
 	obtenerN(0,Lista,A),
@@ -213,7 +214,8 @@ recorrer([Lista|Resto]):-
 	obtenerN(4,Lista,E),
 
 	respuesta(A,B,C,D,E),
-	recorrer(Resto),!.
+	recorrer(Resto),!;
+	write('Gracias por utilizar TravelAgencyLog').
 
 /*
 	Función Principal, da la bienvenida al usuario y solicita la información necesaria para encontrar una ruta de avión */
@@ -225,7 +227,7 @@ iniciar():-
 	tomarClase(Clase,Respuesta),
 	presupuesto(Presupuesto),
 	camino_barato(Origen, Destino, Aerolinea,Clase,Presupuesto,_,Ruta),!,
-	recorrer(Ruta), write('Gracias por utilizar TravelAgencyLog').
+	recorrer(Ruta).
 	/*write(Origen), write(' '), write(Destino), write(' '), write(Aerolinea), write(' '), write(Clase),  write(' '), write(Presupuesto).*/
 	/*tirar_todo([Origen,Destino,Aerolinea,Clase,400]).*/
 
