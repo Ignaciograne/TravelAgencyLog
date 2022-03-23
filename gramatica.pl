@@ -11,6 +11,7 @@ Juan Rodriguez*/
 Siempre peuden ser vacias en caso de no existir*/
 
 /*Verbos congujados en presente simple y futuro simple*/
+verbo--> [].
 verbo--> [dirijo];[diriges];[dirige];[dirigimos];[dirigen].
 verbo--> [dirigire];[dirigiras];[dirigira];[digiremos];[dirigiran];[dirigirnos].
 verbo--> [desplazo];[desplazas];[desplaza];[desplazamos];[desplazan].
@@ -41,7 +42,6 @@ verbo--> [viajo];[viajas];[viaja];[viajamos];[viajan].
 verbo--> [viajare];[viajaras];[viajara];[viajaremos];[viajaran].
 verbo--> [vuelvo];[vuelvas];[vuelve];[volvemos];[vuelven].
 verbo--> [volvere];[volverias];[volvera];[volveremos];[volveran].
-verbo--> [].
 
 
 /*Verbos infinitivos*/
@@ -69,23 +69,23 @@ articulo-->[la];[las];[una];[unas].
 articulo-->[al];[del].
 
 /*Posibles sustantivos dentro de desplazamientos*/
-sustantivos-->[destino];[avion];[origen];[aerolinea];[clase];[presupuesto];[lugar];[pais];[ciudad];[dolares];[viaje];[vacaciones];[actividad];[navidad];[].
+sustantivos-->[];[destino];[avion];[origen];[aerolinea];[clase];[presupuesto];[lugar];[pais];[ciudad];[dolares];[viaje];[vacaciones];[actividad];[navidad].
 
 
 /*Adverbios: funcionan para respuetas concretas*/
-adverbio-->[si];[no];[ninguno];[ninguna];[tambien];[claro];[].
+adverbio-->[];[si];[no];[ninguno];[ninguna];[tambien];[claro].
 
 
 /*Adjetivos: En caso de varios pasos*/
-adjetivo--> [primero];[luego];[].
+adjetivo--> [];[primero];[luego].
 
 
 /*Conjunciones*/
-conjuncion-->[que];[].
+conjuncion-->[];[que].
 
 
 /*Signos de puntuacion*/
-signo-->[,];[.];[!];[$];[].
+signo-->[];[,];[.];[!];[$].
 
 
 /*Sintagmas utilizados en una oracion*/
