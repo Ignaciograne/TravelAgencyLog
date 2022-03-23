@@ -85,7 +85,7 @@ conjuncion-->[];[que].
 
 
 /*Signos de puntuacion*/
-signo-->[];[,];[.];[!];[$].
+signo-->[];[,].
 
 
 /*Sintagmas utilizados en una oracion*/

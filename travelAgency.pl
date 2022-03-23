@@ -30,12 +30,12 @@ miembro(X,[_|R]):-miembro(X,R).
  Solicita al usuario una respuesta a ser evaluada como oracion valida y si hay alguna palabra que sea un origen evaluada en el grafo en el archivo datos
 */
 viajar_desde(Origen,Respuesta):-
-	write('Ingrese su Origen \n'),
+	write('Ingrese su origen \n'),
         readln(Respuesta,_,_,_,lowercase),
         miembro(Origen,Respuesta),
         oracion(Respuesta,[]),
         es_origen(Origen), !
-        ; write('No tenemos ese Origen disponible. \n'),
+        ; write('No tenemos ese origen disponible. \n'),
         viajar_desde(Origen,Respuesta).
 
 /*
@@ -45,11 +45,11 @@ viajar_desde(Origen,Respuesta):-
  Solicita al usuario una respuesta para ser evaluada como oracion valida, y se asignaran valores que satisfagan si alguna se satisface en Destinos y que Origen sea diferente a Destino.
 */
 viajar_hasta(Origen,Destino):-
-	write('Ingrese su Destino \n.'),
+	write('Ingrese su destino \n.'),
         readln(Respuesta,_,_,_,lowercase),
         oracion(Respuesta, []),
         validar_destino(Origen,Destino,Respuesta), !
-        ; write('No tenemos ese Destino disponible. \n'),
+        ; write('No tenemos ese destino disponible. \n'),
         viajar_hasta(Origen, Destino).
 
 /*
@@ -59,7 +59,7 @@ viajar_hasta(Origen,Destino):-
  Solicita al usuario una respuesta para ser evaluada como oracion valida, y se asignaran valores que satisfagan si alguna se satisface en destinos y que origen sea diferente a destino.
 */
 preferencia_aerolinea(Aero):-
-	write('Ingrese su aerolinea. \n'),
+	write('Tiene alguna aerolinea de preferencia? \n'),
         readln(Respuesta,_,_,_,lowercase),
         sin_preferencia(Respuesta), !
         ; validar_Aero(Aero,Respuesta),
@@ -78,7 +78,7 @@ preferencia_clase(Clase):-
         sin_preferencia(Respuesta), !
         ; validar_clase(Clase,Respuesta),
         oracion(Respuesta, []), !
-        ; write('No tenemos esta clase disponible \n.'),
+        ; write('Entrada no valida \n.'),
         preferencia_clase(Clase).
 
 /*
@@ -93,7 +93,7 @@ presupuesto(Presupuesto):-
         number(Presupuesto), !
         ; sin_preferencia(Respuesta),
         Presupuesto = 1000000, !
-        ; write('No he podido entenderte. \n'),
+        ; write('Presupuesto no valido. \n'),
         presupuesto(Presupuesto).
 
 
